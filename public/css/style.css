@@ -25,12 +25,16 @@ body {
 
 .my-navbar-brand,
 .my-navbar-item {
-  color: #8c8c8c;
+  color: #f4f7f8	;
 }
 
 .my-navbar-brand:hover,
 a.my-navbar-item:hover {
   color: #ffffff;
+}
+
+.th {
+  color: gray;
 }
 
 .table td:nth-child(2),
@@ -39,6 +43,9 @@ a.my-navbar-item:hover {
   white-space: nowrap;
   width: 1px;
 }
+
+.table td:nth-child(even){background-color: gray; }
+.table td:nth-child(odd){background-color: white; }
 
 .form-control[disabled],
 .form-control[readonly] {

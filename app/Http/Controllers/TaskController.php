@@ -2,24 +2,29 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Requests\CreateTask;
 use App\Folder;
+use App\Http\Requests\CreateTask;
+use App\Http\Requests\EditTask;
 use App\Task;
 use Illuminate\Http\Request;
+// ★ Authクラスをインポートする
+use Illuminate\Support\Facades\Auth;
 
 class TaskController extends Controller
 {   
-
     public function index(int $id)
     {
-        // すべてのフォルダを取得する
-        $folders = Folder::all();
+        // ★ ユーザーのフォルダを取得する
+        $folders = Auth::user()->folders()->get();
+        
+        // ✗すべてのフォルダを取得する
+        // $folders = Folder::all();
 
-        // 選ばれたフォルダを取得する
+        // ★ 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
 
-        // 選ばれたフォルダに紐づくタスクを取得する
-        // $tasks = Task::where('folder_id', $current_folder->id)->get();
+        // ★選ばれたフォルダに紐づくタスクを取得する
+        // ✗$tasks = Task::where('folder_id', $current_folder->id)->get();
         $tasks = $current_folder->tasks()->get(); 
 
         return view('tasks/index', [
@@ -39,14 +44,19 @@ class TaskController extends Controller
         ]);
     }
 
-    public function create(int $id, CreateTask $request)
-    {
-        $current_folder = Folder::find($id);
+    public function create(CreateTask $request, int $id)
+    {   
 
+        $current_folder = Folder::find($id);
+        
         $task = new Task();
         $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
+        $task->status = 3;
+        $task->created_by = $request->user()->id;
+        $task->updated_by = $request->user()->id;
+        // $task->category
 
         $current_folder->tasks()->save($task);
 
@@ -84,4 +94,9 @@ class TaskController extends Controller
             'id' => $task->folder_id,
         ]);
     }
+
+    // deleteアクションを下記にコーディング
+     
+
+
 }

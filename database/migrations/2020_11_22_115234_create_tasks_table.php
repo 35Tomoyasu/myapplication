@@ -18,7 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('name', 30);
             $table->string('contents');
             $table->dateTime('finish_date');
-            $table->integer('status')->comment('1は完了、２は着手、３は未着手');
+            $table->integer('status')->default(3)->comment('1は完了、２は着手、３は未着手');
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();

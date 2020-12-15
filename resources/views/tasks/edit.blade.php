@@ -8,7 +8,7 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-default">
+        <nav class="panel panel-success">
           <div class="panel-heading">タスクを編集する</div>
           <div class="panel-body">
             @if($errors->any())
@@ -50,7 +50,7 @@
                        value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-primary">送信</button>
+                <button type="submit" class="btn btn-success">送信</button>
               </div>
             </form>
           </div>

@@ -3,6 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use App\Folder;
+use App\Category;
 
 class Task extends Model
 {
@@ -47,6 +49,11 @@ class Task extends Model
         }
 
         return self::STATUS[$status]['class'];
+    }
+    // ※12/6メンタリング時修正
+    public function folder() 
+    {
+        return $this->belongsTo(Folder::class);
     }
 
     /**

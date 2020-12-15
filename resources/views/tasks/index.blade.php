@@ -8,7 +8,7 @@
         <nav class="panel panel-default">
           <div class="panel-heading">フォルダ</div>
           <div class="panel-body">
-            <a href="{{ route('folders.create') }}" class="btn btn-default btn-block">
+            <a href="{{ route('folders.create') }}" class="btn btn-success btn-block">
               フォルダを追加する
             </a>
           </div>
@@ -30,16 +30,18 @@
           <div class="panel-heading">タスク</div>
           <div class="panel-body">
             <div class="text-right">
-            <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-default btn-block">タスクを追加する</a>
+            <a href="{{ route('tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-success btn-block">タスクを追加する</a>
             </div>
           </div>
           <table class="table">
             <thead>
             <tr>
-              <th>タスク名</th>
-              <th>内容</th>
-              <th>期限</th>
-              <th>状態</th>
+
+            <!-- 間隔はwidth="%で指定" -->
+              <th width="25%">タスク名</th>
+              <th width="45%">内容</th>
+              <th width="20%">期限</th>
+              <th width="10%">状態</th>
             </tr>
             </thead>
             <tbody>
@@ -53,6 +55,10 @@
                 </td>
                 
                 <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}">編集</a></td>
+
+                <!-- 削除機能を下記にコーディング -->
+
+                
               </tr>
             @endforeach
             </tbody>

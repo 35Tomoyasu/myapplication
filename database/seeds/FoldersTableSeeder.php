@@ -13,15 +13,20 @@ class FoldersTableSeeder extends Seeder
      */
     public function run()
     {
+        $user = DB::table('users')->first();
+
         $names = ['プログラミング','趣味','就活'];
 
         foreach ($names as $name) {
             DB::table('folders')->insert([
                 'name' => $name,
-                // 'created_by' => 不明
-                // 'updated_by' => 不明
+                'created_by' => '',
+                'updated_by' => '',
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
+
+                // user_idとフォルダを紐付ける
+                'user_id' => $user->id,
             ]);
         }
     }

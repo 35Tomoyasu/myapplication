@@ -2,15 +2,20 @@
 
 namespace App\Http\Requests;
 
-use App\Task;
+use App\Folder;
 use Illuminate\Validation\Rule;
 
-class EditTask extends CreateTask
+class EditFolder extends CreatFolder
 {
     public function rules()
     {   
-        return [
-            'name' => 'required|max:30',
+        $rule = parent::rules();
+
+        $status_rule = Rule::in(array_keys(Task::STATUS));
+        // -> 'in(1, 2, 3)' を出力
+
+        return $rule + [
+            'status' => 'required|' . $status_rule,
         ];
     }
 

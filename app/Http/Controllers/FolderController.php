@@ -39,4 +39,40 @@ class FolderController extends Controller
             'id' => $folder->id,
         ]);
     }
+
+    /**
+     * GET /folders/{id}/edit
+     */
+    public function showEditForm(int $id, int $folder_id)
+    {
+        $folder = Folder::find($folder_id);
+
+        return view('folders/edit', [
+            'folder' => $folder,
+        ]);
+    }
+
+    public function edit(int $id, int $folder_id, Folder $request)
+    {
+        // 1
+        $folder = Folder::find($folder_id);
+
+        // 2
+        $folder->name = $request->name;
+        $folder->save();
+
+        // 3
+        return redirect()->route('tasks.index', [
+            'id' => $task->folder_id,
+        ]);
+    }
+
+    public function delete(Request $request)
+    {
+        $folder = Folder::find($request->folder_id);
+        $folder->delete();
+        return redirect()->route('tasks.index', [
+            'id' => $folder->id,
+        ])->with('flash_message', '削除が完了しました'); 
+    }
 }

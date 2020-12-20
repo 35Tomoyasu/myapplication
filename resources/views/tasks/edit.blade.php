@@ -34,6 +34,12 @@
                 <input type="text" class="form-control" name="finish_date" id="finish_date"
                        value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
               </div>
+
+              <div class="form-group">
+                <label for="contents">カテゴリー</label>
+                <textarea class="form-control" name="contents" rows="3">{{ old('contents') }}</textarea>
+              </div>
+
               <div class="form-group">
                 <label for="status">状態</label>
                 <select name="status" id="status" class="form-control">
@@ -43,11 +49,6 @@
                     </option>
                   @endforeach
                 </select>
-              </div>
-              <div class="form-group">
-                <label for="finish_date">期限</label>
-                <input type="text" class="form-control" name="finish_date" id="finish_date"
-                       value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">送信</button>

@@ -36,14 +36,7 @@
               </div>
               <div class="form-group">
                 <label for="category">カテゴリー</label>
-                <select class="form-control">
-                  <option>カテゴリーを選択してください</option>
-                  <option>最優先</option>
-                  <option>優先</option>
-                  <option>通常</option>
-                  <option>後回し</option>
-                  <!-- カテゴリーテーブルの名前を入れる -->
-                </select>
+                {{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">送信</button>

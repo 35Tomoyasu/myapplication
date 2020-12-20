@@ -44,15 +44,16 @@ a.my-navbar-item:hover {
   width: 1px;
 }
 
-.table td:nth-child(even){background-color: gray; }
-.table td:nth-child(odd){background-color: white; }
-
 .form-control[disabled],
 .form-control[readonly] {
   background-color: #fff;
 }
 
 a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.active:hover {
-  background-color: #8cc152;
-  border-color: #8cc152;
+  background-color: #333;
+  border-color: #333;
+}
+
+span.btn btn-xs btn-primary {
+  text-align: right;
 }

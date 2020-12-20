@@ -15,8 +15,9 @@ class CreateCategoriesTable extends Migration
     {
         Schema::create('categories', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name');
-            // integer('name')->default(1)->comment('1はカテゴリーを選択してください、2は最優先、3は優先、4は通常、5は後回し',);
+
+            // カテゴリー名
+            $table->text('name'); 
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();

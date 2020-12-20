@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Folder;
 use App\Category;
@@ -12,9 +13,9 @@ class Task extends Model
      * 状態定義
      */
     const STATUS = [
-        1 => [ 'label' => '完了', 'class' => 'label-danger' ],
-        2 => [ 'label' => '着手', 'class' => 'label-info' ],
-        3 => [ 'label' => '未着手', 'class' => '' ],
+        1 => [ 'label' => '完了', 'class' => 'label-info' ],
+        2 => [ 'label' => '着手', 'class' => 'label-warning' ],
+        3 => [ 'label' => '未着手', 'class' => 'label-light' ],
     ];
 
     /**
@@ -61,8 +62,9 @@ class Task extends Model
      * @return string
      */
     public function getFormattedFinishDateAttribute()
-    {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['finish_date'])
-            ->format('Y/m/d');
+    {   
+        
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['finish_date'])
+            ->format('Y/m/d H:i');
     }
 }

@@ -27,6 +27,13 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
     Route::post('/folders/create', 'FolderController@create');
 
+    // ルーティングの設定（フォルダ編集）
+    Route::get('/folders/{id}/edit', 'FolderController@showEditForm')->name('folders.edit');
+    Route::post('/folders/{id}/edit', 'FolderController@edit');
+
+    // // ルーティングの設定（フォルダ削除）
+    Route::get('/folder/delete', 'FolderController@delete')->name('folder_delete');
+
     // ルーティングの設定（タスク作成）
     Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');
     Route::post('/folders/{id}/tasks/create', 'TaskController@create');

@@ -25,7 +25,6 @@ class TasksTableSeeder extends Seeder
                 'created_at' => Carbon::now(),
                 'updated_at' => Carbon::now(),
                 'folder_id' => 1,
-                'category_id' => 1,
             ]);
         }
     }

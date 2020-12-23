@@ -15,7 +15,7 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             'name' => 'test',
-            'email' => 'dummy5@email.com',
+            'email' => 'dummy8@email.com',
             // bcrypt() : ()内に与えられた文字列の暗号化
             'password' => bcrypt('test1234'),
             'created_at' => Carbon::now(),

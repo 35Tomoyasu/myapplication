@@ -5,7 +5,6 @@ namespace App;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 use App\Folder;
-use App\Category;
 
 class Task extends Model
 {

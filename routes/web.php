@@ -42,7 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
     Route::get('/folders/{id}/tasks/{task_id}/edit', 'TaskController@showEditForm')->name('tasks.edit');
     Route::post('/folders/{id}/tasks/{task_id}/edit', 'TaskController@edit');
 
-    // フォルダの編集機能、フォルダの削除機能、タスクの削除機能
+    // ルーティングの設定（タスク削除）
+    Route::post('/folders/{id}/tasks/{task_id}/', 'TaskController@delete')->name('tasks.delete');
 
 });
 

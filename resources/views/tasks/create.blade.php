@@ -26,7 +26,7 @@
               </div>
               <div class="form-group">
                 <label for="contents">内容</label>
-                <textarea class="form-control" name="contents" rows="3">{{ old('contents') }}</textarea>
+                <input type="text" class="form-control" name="contents" id="contents" value="{{ old('contents') }}" />
               </div>
               <div class="form-group">
                 <label for="finish_date">期限</label>
@@ -36,7 +36,7 @@
               </div>
               <div class="form-group">
                 <label for="category">カテゴリー</label>
-                {{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}
+                <p>{{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}</p>
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">送信</button>

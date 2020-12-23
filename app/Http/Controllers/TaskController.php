@@ -39,8 +39,13 @@ class TaskController extends Controller
      */
     public function showCreateForm(int $id)
     {
+        $categories = \App\Category::orderBy('id','asc')->pluck('name','id');
+        //  プルダウンの一番最初は空欄にしたい時には、先頭に追加しておく
+        $categories = $categories -> prepend('選択してください', '');
+
         return view('tasks/create', [
-            'folder_id' => $id
+            'folder_id' => $id ,
+            'categories' => $categories
         ]);
     }
 
@@ -48,11 +53,11 @@ class TaskController extends Controller
     {   
 
         $current_folder = Folder::find($id);
-        
         $task = new Task();
         $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
+        // $task->category = $request->category;
         $task->status = 3;
         $task->created_by = $request->user()->id;
         $task->updated_by = $request->user()->id;
@@ -65,15 +70,21 @@ class TaskController extends Controller
         ]);
     }
 
-        /**
-     * GET /folders/{id}/tasks/{task_id}/edit
+    /*
+     GET /folders/{id}/tasks/{task_id}/edit
      */
     public function showEditForm(int $id, int $task_id)
     {
         $task = Task::find($task_id);
 
+        $categories = \App\Category::orderBy('id','asc')->pluck('name','id');
+        //  プルダウンの一番最初は空欄にしたい時には、先頭に追加しておく
+        $categories = $categories -> prepend('選択してください', '');
+
+
         return view('tasks/edit', [
             'task' => $task,
+            'categories' => $categories
         ]);
     }    
 
@@ -96,6 +107,14 @@ class TaskController extends Controller
     }
 
     // deleteアクションを下記にコーディング
+    public function delete(int $id, int $task_id) 
+    {
+        $task = Task::find($task_id);
+        $task->delete();
+        return redirect()->route('tasks.index', [
+            'id' => $task->folder_id,
+        ]);
+    }
      
 
 

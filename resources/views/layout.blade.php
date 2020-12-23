@@ -7,6 +7,7 @@
   <title>Task Management App</title>
   @yield('styles')
   <link rel="stylesheet" href="{{ asset('css/style.css') }}">
+  <link rel="stylesheet" href="{{ asset('css/app.css') }}">
 </head>
 <body>
 <header>

@@ -18,6 +18,7 @@ class CreateTasksTable extends Migration
             $table->string('name', 30);
             $table->string('contents');
             $table->dateTime('finish_date');
+            $table->string('priority');
             $table->integer('status')->default(3)->comment('1は完了、２は着手、３は未着手');
             $table->string('created_by');
             $table->string('updated_by');
@@ -25,8 +26,6 @@ class CreateTasksTable extends Migration
             // 外部キーはtimestamps();の下に書くと見やすい
             $table->unsignedBigInteger('folder_id');
             $table->foreign('folder_id')->references('id')->on('folders');
-            $table->unsignedBigInteger('category_id');
-            $table->foreign('category_id')->references('id')->on('categories');
         });
     }
 

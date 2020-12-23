@@ -22,12 +22,11 @@
               @csrf
               <div class="form-group">
                 <label for="name">タスク名</label>
-                <input type="text" class="form-control" name="name" id="name"
-                       value="{{ old('name') ?? $task->name }}" />
+                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ?? $task->name }}" />
               </div>
               <div class="form-group">
                 <label for="contents">内容</label>
-                <textarea class="form-control" name="contents" rows="3">{{ old('contents') }}</textarea>
+                <input type="text" class="form-control" name="contents" id="contents" value="{{ old('contents') ?? $task->contents }}" />
               </div>
               <div class="form-group">
                 <label for="finish_date">期限</label>
@@ -36,16 +35,16 @@
               </div>
 
               <div class="form-group">
-                <label for="contents">カテゴリー</label>
-                <textarea class="form-control" name="contents" rows="3">{{ old('contents') }}</textarea>
+                <label for="category">カテゴリー</label>
+                <p>{{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}</p>
               </div>
 
               <div class="form-group">
                 <label for="status">状態</label>
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\Task::STATUS as $key => $val)
-                    <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }}
-                      {{ $val['label'] }} >
+                    <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }} >
+                      {{ $val['label'] }} 
                     </option>
                   @endforeach
                 </select>

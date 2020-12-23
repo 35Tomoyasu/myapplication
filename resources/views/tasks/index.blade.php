@@ -52,11 +52,11 @@
             <tr>
 
             <!-- 間隔はwidth="%で指定" -->
-              <th width="20%">タスク名</th>
-              <th width="45%">内容</th>
-              <th width="25%">期限</th>
-              <th width="25%">カテゴリー</th>
-              <th width="10%">状態</th>
+              <th width="40%">タスク名</th>
+              <th width="60%">内容</th>
+              <th width="5%">期限</th>
+              <th width="5%">カテゴリー</th>
+              <th width="5%">状態</th>
             </tr>
             </thead>
             <tbody>
@@ -65,18 +65,29 @@
                 <td>{{ $task->name }}</td>
                 <td>{{ $task->contents }}</td>
                 <td>{{ $task->formatted_finish_date }}</td>
-                <td>{{ $task->contents }}</td> 
+
+                <!-- カテゴリー表示 -->
+                <td>
+                  {{ $task->category }}
+                </td> 
+
+                <!-- 状態 -->
                 <td>
                   <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                 </td>
                 
+                <!-- 編集画面へ -->
                 <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" class="btn btn-xs btn-primary">編集</a></td>
+
 
                 <!-- 削除機能を下記にコーディング -->
 
-                <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" class="btn btn-xs btn-danger">削除</a></td>
-
-                
+                <td>
+                <form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" id="form_{{ $task->id }}" method="POST">
+                {{ csrf_field() }}
+                <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deletePost(this);">削除</a>
+                </form>
+                </td>
               </tr>
             @endforeach
             </tbody>
@@ -85,4 +96,23 @@
       </div>
     </div>
   </div>
+@endsection
+
+@section('scripts')
+  <script>
+  <!--
+  /************************************
+   削除ボタンを押してすぐにレコードが削除
+  されるのも問題なので、一旦javascriptで
+  確認メッセージを流します。 
+  *************************************/
+  //-->
+  function deletePost(e) {
+    'use strict';
+  
+    if (confirm('本当に削除していいですか?')) {
+    document.getElementById('form_' + e.dataset.id).submit();
+    }
+  }
+  </script>
 @endsection

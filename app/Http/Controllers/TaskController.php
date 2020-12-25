@@ -38,14 +38,9 @@ class TaskController extends Controller
      * GET /folders/{id}/tasks/create
      */
     public function showCreateForm(int $id)
-    {
-        $categories = \App\Category::orderBy('id','asc')->pluck('name','id');
-        //  プルダウンの一番最初は空欄にしたい時には、先頭に追加しておく
-        $categories = $categories -> prepend('選択してください', '');
-
+    {   
         return view('tasks/create', [
             'folder_id' => $id ,
-            'categories' => $categories
         ]);
     }
 
@@ -57,11 +52,10 @@ class TaskController extends Controller
         $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
-        // $task->category = $request->category;
-        $task->status = 3;
+        $task->priority = $request->priority;
         $task->created_by = $request->user()->id;
         $task->updated_by = $request->user()->id;
-        // $task->category
+    
 
         $current_folder->tasks()->save($task);
 
@@ -77,14 +71,8 @@ class TaskController extends Controller
     {
         $task = Task::find($task_id);
 
-        $categories = \App\Category::orderBy('id','asc')->pluck('name','id');
-        //  プルダウンの一番最初は空欄にしたい時には、先頭に追加しておく
-        $categories = $categories -> prepend('選択してください', '');
-
-
         return view('tasks/edit', [
             'task' => $task,
-            'categories' => $categories
         ]);
     }    
 
@@ -96,8 +84,9 @@ class TaskController extends Controller
         
         $task->name = $request->name;
         $task->contents = $request->contents;
-        $task->status = $request->status;
         $task->finish_date = $request->finish_date;
+        $task->priority = $request->priority;
+        $task->status = $request->status;
         $task->save();
 
         

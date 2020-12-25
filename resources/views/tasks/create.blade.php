@@ -35,8 +35,12 @@
                 <!-- <input type="datetime-local" class="form-control" name="finish_date" id="" value="{{ old('finish_date') }}" /> -->
               </div>
               <div class="form-group">
-                <label for="category">カテゴリー</label>
-                <p>{{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}</p>
+                <label for="priority">優先度</label>
+                <select type="text" class="form-control" name="priority" id="priority">                          
+                    @foreach(config('priority') as $key => $priority)
+                        <option value="{{ $priority }}">{{ $priority }}</option>
+                    @endforeach
+                </select>
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">送信</button>

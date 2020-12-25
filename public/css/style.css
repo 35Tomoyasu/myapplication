@@ -33,15 +33,11 @@ a.my-navbar-item:hover {
   color: #ffffff;
 }
 
-.th {
-  color: gray;
-}
 
-.table td:nth-child(2),
 .table td:nth-child(3),
-.table td:nth-child(4) {
+.table td:nth-child(4),
+.table td:nth-child(5){
   white-space: nowrap;
-  width: 1px;
 }
 
 .form-control[disabled],
@@ -54,6 +50,6 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
   border-color: #333;
 }
 
-span.btn btn-xs btn-primary {
-  text-align: right;
+.task {
+  text-align: center;
 }

@@ -33,19 +33,23 @@
                 <input type="text" class="form-control" name="finish_date" id="finish_date"
                        value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
               </div>
-
               <div class="form-group">
-                <label for="category">カテゴリー</label>
-                <p>{{ Form::select('category_id', $categories, null, ['class' => 'form', 'id' => 'category_id']) }}</p>
+                <label for="priority">優先度</label>
+                <select name="priority" id="priority" class="form-control" >                          
+                    @foreach(config('priority') as $key => $priority)
+                      <option value="{{ $priority }}" {{ $priority == old('priority', $task->priority) ? 'selected' : '' }} >
+                      {{ $priority }}
+                      </option>
+                    @endforeach
+                </select>
               </div>
-
               <div class="form-group">
                 <label for="status">状態</label>
                 <select name="status" id="status" class="form-control">
                   @foreach(\App\Task::STATUS as $key => $val)
-                    <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }} >
-                      {{ $val['label'] }} 
-                    </option>
+                      <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }} >
+                        {{ $val['label'] }} 
+                      </option>
                   @endforeach
                 </select>
               </div>

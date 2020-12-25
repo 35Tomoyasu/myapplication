@@ -29,7 +29,8 @@
               <a href="{{ route('tasks.index', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : ''  }}" >
                 {{ $folder->name }}             
                 <span class="pull-right">
-                  <span class="btn btn-xs btn-primary" onclick="window.location='https://tech-boost.jp/'; event.preventDefault();">編集</span>
+                  <span class="btn btn-xs btn-primary" onclick="window.location='https://tech-boost.jp/'; event.preventDefault();">編集</span> 
+                  
                   <span class="btn btn-xs btn-danger" onclick="window.location='{{ route('folder_delete') }}?id={{ $folder->id }}'; event.preventDefault();">削除</span>
                   
                 </span>
@@ -50,38 +51,31 @@
           <table class="table">
             <thead>
             <tr>
-
             <!-- 間隔はwidth="%で指定" -->
-              <th width="40%">タスク名</th>
-              <th width="60%">内容</th>
-              <th width="5%">期限</th>
-              <th width="5%">カテゴリー</th>
-              <th width="5%">状態</th>
+              <th class="task" width="15%">タスク名</th>
+              <th class="task" width="50%">内容</th>
+              <th class="task" width="15%">期限</th>
+              <th class="task" width="10%">優先度</th>
+              <th class="task" width="10%">状態</th>
+              <th></th>
+              <th></th>
             </tr>
             </thead>
             <tbody>
             @foreach($tasks as $task)
               <tr>
-                <td>{{ $task->name }}</td>
-                <td>{{ $task->contents }}</td>
-                <td>{{ $task->formatted_finish_date }}</td>
-
-                <!-- カテゴリー表示 -->
-                <td>
-                  {{ $task->category }}
-                </td> 
-
-                <!-- 状態 -->
-                <td>
+                <td class="task">{{ $task->name }}</td>
+                <td class="task">{{ $task->contents }}</td>
+                <td class="task">{{ $task->formatted_finish_date }}</td>
+                <td class="task">{{ $task->priority }}</td> 
+                <td class="task">
                   <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                 </td>
                 
-                <!-- 編集画面へ -->
+                <!-- 編集画面へ遷移 -->
                 <td><a href="{{ route('tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" class="btn btn-xs btn-primary">編集</a></td>
 
-
-                <!-- 削除機能を下記にコーディング -->
-
+                <!-- 削除機能 -->
                 <td>
                 <form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" id="form_{{ $task->id }}" method="POST">
                 {{ csrf_field() }}
@@ -100,11 +94,10 @@
 
 @section('scripts')
   <script>
-  <!--
-  /************************************
+  <!--/************************************
    削除ボタンを押してすぐにレコードが削除
   されるのも問題なので、一旦javascriptで
-  確認メッセージを流します。 
+  確認メッセージを流す。 
   *************************************/
   //-->
   function deletePost(e) {

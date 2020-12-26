@@ -52,8 +52,8 @@
             <thead>
             <tr>
             <!-- 間隔はwidth="%で指定" -->
-              <th class="task" width="15%">タスク名</th>
-              <th class="task" width="50%">内容</th>
+              <th class="task" width="20%">タスク名</th>
+              <th class="task" width="45%">内容</th>
               <th class="task" width="15%">期限</th>
               <th class="task" width="10%">優先度</th>
               <th class="task" width="10%">状態</th>

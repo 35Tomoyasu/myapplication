@@ -32,7 +32,7 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/folders/{id}/edit', 'FolderController@edit');
 
     // // ルーティングの設定（フォルダ削除）
-    Route::get('/folder/delete', 'FolderController@delete')->name('folder_delete');
+    Route::delete('/folders/{id}/tasks', 'FolderController@delete')->name('folders.delete');
 
     // ルーティングの設定（タスク作成）
     Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');

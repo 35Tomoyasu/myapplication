@@ -43,36 +43,47 @@ class FolderController extends Controller
     /**
      * GET /folders/{id}/edit
      */
-    public function showEditForm(int $id, int $folder_id)
+    public function showEditForm()
     {
-        $folder = Folder::find($folder_id);
+        $current_folder = Folder::find($current_folder_id);
 
         return view('folders/edit', [
-            'folder' => $folder,
+            'current_folder' => $current_folder,
         ]);
     }
 
-    public function edit(int $id, int $folder_id, Folder $request)
+    public function edit(EditFolder $request)
     {
         // 1
-        $folder = Folder::find($folder_id);
+        $current_folder = Folder::find($folder_id);
 
         // 2
-        $folder->name = $request->name;
-        $folder->save();
+        $current_folder->name = $request->name;
+        $current_folder->save();
 
         // 3
         return redirect()->route('tasks.index', [
-            'id' => $task->folder_id,
+            'id' => $current_folder_id,
         ]);
     }
 
-    public function delete(Request $request)
+    // deleteアクションを下記にコーディング
+    public function delete(int $id) 
     {
-        $folder = Folder::find($request->folder_id);
-        $folder->delete();
+        // ★ 選ばれたフォルダを取得する
+        $current_folder = Folder::find($id);
+        $current_folder->delete();
         return redirect()->route('tasks.index', [
-            'id' => $folder->id,
-        ])->with('flash_message', '削除が完了しました'); 
+            'id' => $current_folder_id->id,
+        ]);
     }
+
+    // public function delete(Request $request)
+    // {
+    //     $folder = Folder::find($request->folder_id);
+    //     $folder->delete();
+    //     return redirect()->route('tasks.index', [
+    //         'id' => $folder->id,
+    //     ])->with('flash_message', '削除が完了しました'); 
+    // }
 }

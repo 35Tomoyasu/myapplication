@@ -70,20 +70,10 @@ class FolderController extends Controller
     // deleteアクションを下記にコーディング
     public function delete(int $id) 
     {
+        dd($id);
         // ★ 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
         $current_folder->delete();
-        return redirect()->route('tasks.index', [
-            'id' => $current_folder_id->id,
-        ]);
+        return redirect()->route('tasks.index');
     }
-
-    // public function delete(Request $request)
-    // {
-    //     $folder = Folder::find($request->folder_id);
-    //     $folder->delete();
-    //     return redirect()->route('tasks.index', [
-    //         'id' => $folder->id,
-    //     ])->with('flash_message', '削除が完了しました'); 
-    // }
 }

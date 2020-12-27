@@ -28,14 +28,22 @@
             @foreach($folders as $folder)
               <a href="{{ route('tasks.index', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : ''  }}" >
                 {{ $folder->name }}             
-                <span class="pull-right">
-                  <span class="btn btn-xs btn-primary" onclick="window.location='https://tech-boost.jp/'; event.preventDefault();">編集</span> 
-                  
-                  <span class="btn btn-xs btn-danger" onclick="window.location='{{ route('folder_delete') }}?id={{ $folder->id }}'; event.preventDefault();">削除</span>
-                  
-                </span>
               </a>
             @endforeach
+          </div>
+        </nav>
+        <nav class="panel panel-default">
+          <div class="panel-heading">フォルダ編集</div>
+          <div class="panel-body">
+            <a href="{{ route('folders.edit', ['id' => $folder->id]) }}" class="btn btn-primary btn-block">
+              選択中のフォルダ編集
+            </a>
+            <form action="{{ route('folders.delete', ['id' => $current_folder_id]) }}" method="delete">
+              {{ csrf_field() }}
+              @method('DELETE')
+              <input type="submit" class="btn btn-danger btn-block">
+                選択中のフォルダ削除
+            </form>
           </div>
         </nav>
       </div>
@@ -94,12 +102,12 @@
 
 @section('scripts')
   <script>
-  <!--/************************************
+  /************************************
    削除ボタンを押してすぐにレコードが削除
   されるのも問題なので、一旦javascriptで
   確認メッセージを流す。 
   *************************************/
-  //-->
+  
   function deletePost(e) {
     'use strict';
   

@@ -53,3 +53,7 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
 .task {
   text-align: center;
 }
+
+.btn-primary {
+  margin-bottom: 1px;
+}

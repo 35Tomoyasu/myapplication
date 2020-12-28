@@ -9,8 +9,13 @@ class EditTask extends CreateTask
 {
     public function rules()
     {   
-        return [
-            'name' => 'required|max:30',
+        $rule = parent::rules();
+
+        $status_rule = Rule::in(array_keys(Task::STATUS));
+        // -> 'in(1, 2, 3)' を出力
+
+        return $rule + [
+            'status' => 'required|' . $status_rule,
         ];
     }
 

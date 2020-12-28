@@ -18,7 +18,7 @@
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('folders.edit', ['id' => $folder->user_id, 'folder_id' => $folder->id]) }}" method="POST">
+            <form action="{{ route('folders.edit', ['id' => $folder->id]) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="name">フォルダ名</label>

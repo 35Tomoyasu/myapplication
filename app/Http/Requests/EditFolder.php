@@ -5,41 +5,26 @@ namespace App\Http\Requests;
 use App\Folder;
 use Illuminate\Validation\Rule;
 
-class EditFolder extends CreatFolder
+class EditFolder extends CreateFolder
 {
     public function rules()
     {   
         $rule = parent::rules();
 
-        $status_rule = Rule::in(array_keys(Task::STATUS));
-        // -> 'in(1, 2, 3)' を出力
-
-        return $rule + [
-            'status' => 'required|' . $status_rule,
-        ];
+        return $rule;
     }
 
     public function attributes()
     {
         $attributes = parent::attributes();
 
-        return $attributes + [
-            'status' => '状態',
-        ];
+        return $attributes;
     }
     
     public function messages()
     {
         $messages = parent::messages();
 
-        $status_labels = array_map(function($item) {
-            return $item['label'];
-        }, Task::STATUS);
-
-        $status_labels = implode('、', $status_labels);
-
-        return $messages + [
-            'status.in' => ':attribute には ' . $status_labels. ' のいずれかを指定してください。',
-        ];
+        return $messages;
     }
 }

@@ -78,24 +78,21 @@ class TaskController extends Controller
 
     public function edit(int $id, int $task_id, EditTask $request)
     {
-        
         $task = Task::find($task_id);
 
-        
         $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;
         $task->status = $request->status;
+
         $task->save();
 
-        
         return redirect()->route('tasks.index', [
             'id' => $task->folder_id,
         ]);
     }
 
-    // deleteアクションを下記にコーディング
     public function delete(int $id, int $task_id) 
     {
         $task = Task::find($task_id);

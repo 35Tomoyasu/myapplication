@@ -5,7 +5,7 @@
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
         <nav class="panel panel-success">
-          <div class="panel-heading">フォルダを追加する</div>
+          <div class="panel-heading">フォルダ作成画面</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">送信</button>
+                <button type="submit" class="btn btn-success">決定</button>
               </div>
             </form>
           </div>

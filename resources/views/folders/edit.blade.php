@@ -8,8 +8,8 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-success">
-          <div class="panel-heading">フォルダを編集する</div>
+        <nav class="panel panel-primary">
+          <div class="panel-heading">フォルダ編集画面</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -26,7 +26,7 @@
                        value="{{ old('name') ?? $folder->name }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">送信</button>
+                <button type="submit" class="btn btn-primary">変更</button>
               </div>
             </form>
           </div>

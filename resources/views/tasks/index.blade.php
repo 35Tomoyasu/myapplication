@@ -9,7 +9,7 @@
           <div class="panel-heading">フォルダ</div>
           <div class="panel-body">
             <a href="{{ route('folders.create') }}" class="btn btn-success btn-block">
-              フォルダを追加
+              フォルダを作成
             </a>
           </div>
           <div class="list-group">
@@ -22,14 +22,15 @@
         </nav>
         <nav class="panel panel-default">
           <div class="panel-heading">フォルダ編集／削除</div>
+          <!-- 編集画面へ遷移 -->
           <div class="panel-body">
             <a href="{{ route('folders.edit', ['id' => $current_folder_id]) }}" class="btn btn-primary btn-block">
               選択中のフォルダを編集
             </a>
-            <form action="{{ route('folders.delete', ['id' => $current_folder_id]) }}" method="post">
+          <!-- 削除機能 -->
+            <form action="{{ route('folders.delete', ['id' => $current_folder_id]) }}" id="form_{{ $folder->id }}" method="post">
               {{ csrf_field() }}
-              @method('DELETE')
-              <input type="submit" value="選択中のフォルダを削除" class="btn btn-danger btn-block">
+            <a href="#" data-id="{{ $folder->id }}" class="btn btn-danger btn-block" onclick="deleteFolderPost(this);">選択中のフォルダを削除</a>
             </form>
           </div>
         </nav>
@@ -74,7 +75,7 @@
                 <td>
                 <form action="{{ route('tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" id="form_{{ $task->id }}" method="post">
                 {{ csrf_field() }}
-                <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deletePost(this);">削除</a>
+                <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deleteTaskPost(this);">削除</a>
                 </form>
                 </td>
               </tr>
@@ -94,11 +95,19 @@
   されるのも問題なので、一旦javascriptで
   確認メッセージを流す。 
   *************************************/
-  
-  function deletePost(e) {
+
+  function deleteFolderPost(e) {
     'use strict';
   
-    if (confirm('本当に削除していいですか?')) {
+    if (confirm('本当に選択中のフォルダを削除していいですか?')) {
+    document.getElementById('form_' + e.dataset.id).submit();
+    }
+  }
+
+  function deleteTaskPost(e) {
+    'use strict';
+  
+    if (confirm('本当にこのタスクを削除していいですか?')) {
     document.getElementById('form_' + e.dataset.id).submit();
     }
   }

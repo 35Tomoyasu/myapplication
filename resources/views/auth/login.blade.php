@@ -4,8 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-success">
-          <div class="panel-heading">ログイン</div>
+        <nav class="panel panel-default">
+          <div class="panel-heading">ログイン画面</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -24,8 +24,8 @@
                 <label for="password">パスワード</label>
                 <input type="password" class="form-control" id="password" name="password">
               </div>
-              <div class="text-right">
-                <button type="submit" class="btn btn-success">送信</button>
+              <div class="text-center">
+                <button type="submit" class="btn">ログイン</button>
               </div>
             </form>
           </div>

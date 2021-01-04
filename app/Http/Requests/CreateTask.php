@@ -34,6 +34,7 @@ class CreateTask extends FormRequest
     {
         return [
             'name' => 'タスク名',
+            'contents' => '内容',
             'finish_date' => '期限日',
         ];
     }

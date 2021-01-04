@@ -11,17 +11,20 @@ use App\Http\Requests\EditFolder;
 
 // クラスのインポート
 use Illuminate\Http\Request;
+
 // ★ Authクラスをインポート
 use Illuminate\Support\Facades\Auth;
 
 class FolderController extends Controller
 {
+    /**
+     * GET /folders/create
+     */
     public function showCreateForm()
     {
         return view('folders/create');
     }
 
-    // public function create(Request $request)
     public function create(CreateFolder $request) //※引数の型変更
     {
        
@@ -69,12 +72,16 @@ class FolderController extends Controller
         ]);
     }
 
-    // deleteアクションを下記にコーディング
     public function delete(int $id) 
     {
         // ★ 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
+
+        // ★ フォルダに紐づくタスクの削除
+        $current_folder->tasks()->delete();
+
         $current_folder->delete();
-        return redirect()->route('tasks.index');
+
+        return redirect('/');
     }
 }

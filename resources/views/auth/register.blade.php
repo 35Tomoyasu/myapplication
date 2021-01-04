@@ -4,8 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-success">
-          <div class="panel-heading">会員登録</div>
+        <nav class="panel panel-default">
+          <div class="panel-heading">会員登録画面</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -33,7 +33,7 @@
                 <input type="password" class="form-control" id="password-confirm" name="password_confirmation">
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">送信</button>
+                <button type="submit" class="btn">登録</button>
               </div>
             </form>
           </div>

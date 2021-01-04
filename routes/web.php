@@ -19,9 +19,6 @@ Route::group(['middleware' => 'auth'], function () {
 
     // ルーティングの設定（ホーム画面）
     Route::get('/', 'HomeController@index')->name('home');
-    
-    // ルーティングの設定（フォルダ一覧）
-    Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index');
 
     // ルーティングの設定（フォルダ作成）
     Route::get('/folders/create', 'FolderController@showCreateForm')->name('folders.create');
@@ -32,7 +29,10 @@ Route::group(['middleware' => 'auth'], function () {
     Route::post('/folders/{id}/edit', 'FolderController@edit');
 
     // // ルーティングの設定（フォルダ削除）
-    Route::delete('/folders/{id}/delete', 'FolderController@delete')->name('folders.delete');
+    Route::post('/folders/{id}/', 'FolderController@delete')->name('folders.delete');
+
+    // ルーティングの設定（タスク一覧）
+    Route::get('/folders/{id}/tasks', 'TaskController@index')->name('tasks.index');
 
     // ルーティングの設定（タスク作成）
     Route::get('/folders/{id}/tasks/create', 'TaskController@showCreateForm')->name('tasks.create');

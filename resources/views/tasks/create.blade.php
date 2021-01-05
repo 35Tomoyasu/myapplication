@@ -34,10 +34,11 @@
               </div>
               <div class="form-group">
                 <label for="priority">優先度</label>
-                <select type="text" class="form-control" name="priority" id="priority">                          
-                    @foreach(config('priority') as $key => $priority)
-                        <option value="{{ $priority }}">{{ $priority }}</option>
-                    @endforeach
+                <select type="text" class="form-control" name="priority" id="priority"> 
+                  <option disabled selected value>選択してください</option>                  
+                  @foreach(config('priority') as $key => $priority)
+                      <option value="{{ $priority }}">{{ $priority }}</option>
+                  @endforeach
                 </select>
               </div>
               <div class="text-right">

@@ -26,7 +26,8 @@ class CreateTask extends FormRequest
         return [
             'name' => 'required|max:30',
             'contents' => 'required|max:255',
-            'finish_date' => 'required|date|after_or_equal:today',
+            'finish_date' => 'required',
+            'priority' => 'required',
         ];
     }
 
@@ -35,14 +36,16 @@ class CreateTask extends FormRequest
         return [
             'name' => 'タスク名',
             'contents' => '内容',
-            'finish_date' => '期限日',
+            'finish_date' => '期限',
+            'priority' => '優先度',
         ];
     }
 
     public function messages()
     {
         return [
-            'finish_date.after_or_equal' => ':attribute には今日以降の日付を入力してください。'
+            'finish_date.required' => ':attribute には今日以降の日時を入力してください。',
+            'priority.required' => ':attribute を選択してください。',
         ];
     }
 }

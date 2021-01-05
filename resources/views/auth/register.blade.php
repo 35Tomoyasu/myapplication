@@ -33,7 +33,7 @@
                 <input type="password" class="form-control" id="password-confirm" name="password_confirmation">
               </div>
               <div class="text-right">
-                <button type="submit" class="btn">登録</button>
+                <button type="submit" class="btn-dark">登録</button>
               </div>
             </form>
           </div>

@@ -3,6 +3,7 @@
 @section('content')
   <div class="container">
     <div class="row">
+
       <!-- ここからフォルダ表示画面 -->
       <div class="col col-md-4">
         <nav class="panel panel-default">
@@ -22,11 +23,13 @@
         </nav>
         <nav class="panel panel-default">
           <div class="panel-heading">フォルダ編集／削除</div>
+
           <!-- 編集画面へ遷移 -->
           <div class="panel-body">
             <a href="{{ route('admin.folders.edit', ['id' => $current_folder_id]) }}" class="btn btn-primary btn-block">
               選択中のフォルダを編集
             </a>
+
           <!-- 削除機能 -->
             <form action="{{ route('admin.folders.delete', ['id' => $current_folder_id]) }}" id="form_{{ $folder->id }}" method="post">
               {{ csrf_field() }}
@@ -35,6 +38,7 @@
           </div>
         </nav>
       </div>
+
       <!-- ここからタスク表示画面 -->
       <div class="column col-md-8">
         <div class="panel panel-default">
@@ -44,10 +48,9 @@
             <a href="{{ route('admin.tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-success btn-block">タスクを追加</a>
             </div>
           </div>
-          <table class="table">
+          <table id="sort_table" class="table table-striped table-hover">
             <thead>
             <tr>
-            <!-- 間隔はwidth="%で指定" -->
               <th class="task" width="20%">タスク名</th>
               <th class="task" width="45%">内容</th>
               <th class="task" width="15%">期限</th>
@@ -90,26 +93,36 @@
 
 @section('scripts')
   <script>
+
   /************************************
    削除ボタンを押してすぐにレコードが削除
   されるのも問題なので、一旦javascriptで
   確認メッセージを流す。 
   *************************************/
 
-  function deleteFolderPost(e) {
-    'use strict';
-  
-    if (confirm('本当に選択中のフォルダを削除していいですか?')) {
-    document.getElementById('form_' + e.dataset.id).submit();
+    function deleteFolderPost(e) {
+      'use strict';
+    
+      if (confirm('本当にフォルダ名【{{ $folder->name }}】を削除しますか?')) {
+      document.getElementById('form_' + e.dataset.id).submit();
+      }
     }
-  }
 
-  function deleteTaskPost(e) {
-    'use strict';
-  
-    if (confirm('本当にこのタスクを削除していいですか?')) {
-    document.getElementById('form_' + e.dataset.id).submit();
+    function deleteTaskPost(e) {
+      'use strict';
+    
+      if (confirm('本当にタスク名【{{ $task->name }}】を削除しますか?')) {
+      document.getElementById('form_' + e.dataset.id).submit();
+      }
     }
-  }
+  </script>
+
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
+  <script>
+    $(document).ready(function() 
+        { 
+            $("#sort_table").tablesorter(); 
+        } 
+    );
   </script>
 @endsection

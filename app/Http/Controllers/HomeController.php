@@ -21,7 +21,7 @@ class HomeController extends Controller
         }
 
         // フォルダが一つでも作成されていれば、そのフォルダのタスク一覧にリダイレクト
-        return redirect()->route('tasks.index', [
+        return redirect()->route('admin.tasks.index', [
             'id' => $folder->id,
         ]);      
     }

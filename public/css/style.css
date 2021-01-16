@@ -50,10 +50,26 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
   border-color: #333;
 }
 
-.task {
+.btn-primary.btn-block {
+  margin-bottom: 1px;
+}
+
+.text-center {
   text-align: center;
 }
 
-.btn-primary {
-  margin-bottom: 1px;
+a {
+  color: #434A54;
+} */
+
+.fa-sort-down {
+  color: blue;
+}
+
+.fa-sort-up {
+  color: red;
+}
+
+.pagination { 
+  justify-content: center; 
 }

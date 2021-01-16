@@ -1,4 +1,5 @@
 @extends('layout')
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
 @section('content')
   <div class="container">
@@ -48,14 +49,14 @@
             <a href="{{ route('admin.tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-success btn-block">タスクを追加</a>
             </div>
           </div>
-          <table id="sort_table" class="table table-striped table-hover">
+          <table class="table">
             <thead>
             <tr>
-              <th class="task" width="20%">タスク名</th>
-              <th class="task" width="45%">内容</th>
-              <th class="task" width="15%">期限</th>
-              <th class="task" width="10%">優先度</th>
-              <th class="task" width="10%">状態</th>
+              <th class="text-center" width="20%">タスク名</th>
+              <th class="text-center" width="45%">内容</th>
+              <th class="text-center" width="10%">状態</th>
+              <th class="text-center" width="10%">優先度</th>
+              <th class="text-center" width="15%">@sortablelink('finish_date', '期限')</th>
               <th></th>
               <th></th>
             </tr>
@@ -63,13 +64,13 @@
             <tbody>
             @foreach($tasks as $task)
               <tr>
-                <td class="task">{{ $task->name }}</td>
-                <td class="task">{{ $task->contents }}</td>
-                <td class="task">{{ $task->formatted_finish_date }}</td>
-                <td class="task">{{ $task->priority }}</td> 
-                <td class="task">
+                <td class="text-center">{{ $task->name }}</td>
+                <td class="text-center">{{ $task->contents }}</td>
+                <td class="text-center">
                   <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                 </td>
+                <td class="text-center">{{ $task->priority }}</td> 
+                <td class="text-center">{{ $task->formatted_finish_date }}</td>
                 
                 <!-- 編集画面へ遷移 -->
                 <td><a href="{{ route('admin.tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" class="btn btn-xs btn-primary">編集</a></td>
@@ -85,6 +86,11 @@
             @endforeach
             </tbody>
           </table>
+        </div>
+
+        <!-- ページングの設定（※ソート条件を反映させる） -->
+        <div class="text-center">
+        {{ $tasks->appends(request()->query())->links() }}
         </div>
       </div>
     </div>
@@ -115,14 +121,5 @@
       document.getElementById('form_' + e.dataset.id).submit();
       }
     }
-  </script>
-
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery.tablesorter/2.31.0/js/jquery.tablesorter.min.js"></script>
-  <script>
-    $(document).ready(function() 
-        { 
-            $("#sort_table").tablesorter(); 
-        } 
-    );
   </script>
 @endsection

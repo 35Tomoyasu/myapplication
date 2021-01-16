@@ -29,9 +29,14 @@
                 <input type="text" class="form-control" name="contents" id="contents" value="{{ old('contents') ?? $task->contents }}" />
               </div>
               <div class="form-group">
-                <label for="finish_date">期限</label>
-                <input type="text" class="form-control" name="finish_date" id="finish_date"
-                       value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
+                <label for="status">状態</label>
+                <select name="status" id="status" class="form-control">                
+                  @foreach(\App\Task::STATUS as $key => $val)
+                      <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }} >
+                        {{ $val['label'] }} 
+                      </option>
+                  @endforeach
+                </select>
               </div>
               <div class="form-group">
                 <label for="priority">優先度</label>
@@ -44,14 +49,9 @@
                 </select>
               </div>
               <div class="form-group">
-                <label for="status">状態</label>
-                <select name="status" id="status" class="form-control">                
-                  @foreach(\App\Task::STATUS as $key => $val)
-                      <option value="{{ $key }}" {{ $key == old('status', $task->status) ? 'selected' : '' }} >
-                        {{ $val['label'] }} 
-                      </option>
-                  @endforeach
-                </select>
+                <label for="finish_date">期限</label>
+                <input type="text" class="form-control" name="finish_date" id="finish_date"
+                       value="{{ old('finish_date') ?? $task->formatted_finish_date }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">変更</button>

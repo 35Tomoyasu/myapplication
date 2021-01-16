@@ -4,10 +4,14 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Kyslik\ColumnSortable\Sortable;
 use App\Folder;
 
 class Task extends Model
-{
+{   
+    use Sortable;
+    public $sortable = ['finish_date'];
+
     /**
      * 状態定義
      */
@@ -30,7 +34,6 @@ class Task extends Model
         if (!isset(self::STATUS[$status])) {
             return '';
         }
-
         return self::STATUS[$status]['label'];
     }
 
@@ -47,23 +50,23 @@ class Task extends Model
         if (!isset(self::STATUS[$status])) {
             return '';
         }
-
         return self::STATUS[$status]['class'];
     }
-    // ※12/6メンタリング時修正
+
+    // リレーション
     public function folder() 
     {
         return $this->belongsTo(Folder::class);
     }
 
     /**
-     * 整形した期限日時
+     * 整形した期限
      * @return string
      */
     public function getFormattedFinishDateAttribute()
     {   
-        
         return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['finish_date'])
             ->format('Y/m/d H:i');
     }
 }
+

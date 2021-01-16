@@ -1,12 +1,13 @@
 <?php
+
 declare(strict_types = 1);
 
 namespace App\Http\Controllers\Admin; 
 
 use App\Http\Controllers\Controller;
 use App\Folder;
-use App\Http\Requests\CreateFolder;
-use App\Http\Requests\EditFolder;
+use App\Http\Requests\CreateFolderRequest;
+use App\Http\Requests\EditFolderRequest;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 
@@ -20,7 +21,7 @@ class FolderController extends Controller
         return view('admin/folders/create');
     }
 
-    public function store(CreateFolder $request) //※引数の型変更
+    public function store(CreateFolderRequest $request) 
     {
         // フォルダモデルのインスタンスを作成する
         $folder = new Folder();
@@ -51,7 +52,7 @@ class FolderController extends Controller
         ]);
     }
 
-    public function update(int $id, EditFolder $request)
+    public function update(int $id, EditFolderRequest $request)
     {
         // 1
         $current_folder = Folder::find($id);

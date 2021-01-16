@@ -175,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        // 追加
+        Kyslik\ColumnSortable\ColumnSortableServiceProvider::class,
     ],
 
     /*

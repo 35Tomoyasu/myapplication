@@ -23,7 +23,7 @@
                 <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">決定</button>
+                <button type="submit" class="btn btn-success">作成</button>
               </div>
             </form>
           </div>

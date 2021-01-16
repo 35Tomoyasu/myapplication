@@ -5,7 +5,7 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-success">
+        <nav class="panel panel-default">
           <div class="panel-heading">パスワード再発行</div>
           <div class="panel-body">
             <form action="{{ route('password.update') }}" method="POST">
@@ -23,7 +23,7 @@
                 <input type="password" class="form-control" id="password-confirm" name="password_confirmation" />
               </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">再発行リンクを送る</button>
+                <button type="submit" class="btn">再発行リンクを送る</button>
               </div>
             </form>
           </div>

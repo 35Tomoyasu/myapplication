@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Task;
 use Illuminate\Validation\Rule;
 
-class EditTask extends CreateTask
+class EditTaskRequest extends CreateTaskRequest
 {
     public function rules()
     {   

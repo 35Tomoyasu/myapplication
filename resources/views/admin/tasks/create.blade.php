@@ -29,10 +29,6 @@
                 <input type="text" class="form-control" name="contents" id="contents" value="{{ old('contents') }}" />
               </div>
               <div class="form-group">
-                <label for="finish_date">期限</label>
-                <input type="text" class="form-control" name="finish_date" id="finish_date" value="{{ old('finish_date') }}" />
-              </div>
-              <div class="form-group">
                 <label for="priority">優先度</label>
                 <select type="text" class="form-control" name="priority" id="priority"> 
                   <option disabled selected value>選択してください</option>                  
@@ -40,6 +36,10 @@
                       <option value="{{ $priority }}">{{ $priority }}</option>
                   @endforeach
                 </select>
+              </div>
+              <div class="form-group">
+                <label for="finish_date">期限</label>
+                <input type="text" class="form-control" name="finish_date" id="finish_date" value="{{ old('finish_date') }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">追加</button>

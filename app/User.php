@@ -33,7 +33,6 @@ class User extends Authenticatable
 
     public function folders()
     {
-        // ※12/6メンタリング時修正
         return $this->hasMany(Folder::class);
     }
 
@@ -47,7 +46,7 @@ class User extends Authenticatable
     ];
 
     /**
-     * ★ パスワード再設定メールを送信する
+     *  パスワード再設定メールを送信する
      */
 
     // 「sendPasswordResetNotification」メソッドはパスワード再設定メール送信時に呼ばれる

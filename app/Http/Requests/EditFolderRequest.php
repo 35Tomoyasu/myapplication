@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Folder;
 use Illuminate\Validation\Rule;
 
-class EditFolder extends CreateFolder
+class EditFolderRequest extends CreateFolder
 {
     public function rules()
     {   

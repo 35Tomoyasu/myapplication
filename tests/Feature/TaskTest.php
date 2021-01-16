@@ -2,7 +2,7 @@
 
 namespace Tests\Feature;
 
-use App\Http\Requests\CreateTask;
+use App\Http\Requests\CreateTaskRequest;
 use Carbon\Carbon;
 use Tests\TestCase;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -22,7 +22,7 @@ class TaskTest extends TestCase
     }
 
     /**
-     * 期限日が日付ではない場合はバリデーションエラー
+     * 期限が日時ではない場合はバリデーションエラー
      * @test
      */
     public function finish_date_should_be_date()
@@ -33,12 +33,12 @@ class TaskTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors([
-            'finish_date' => '期限日 には日付を入力してください。',
+            'finish_date' => '期限 には日時を入力してください。',
         ]);
     }
 
     /**
-     * 期限日が過去日付の場合はバリデーションエラー
+     * 期限が過去の場合はバリデーションエラー
      * @test
      */
     public function finish_date_should_not_be_past()
@@ -49,7 +49,7 @@ class TaskTest extends TestCase
         ]);
 
         $response->assertSessionHasErrors([
-            'finish_date' => '期限日 には今日以降の日付を入力してください。',
+            'finish_date' => '期限 には今日以降の日時を入力してください。',
         ]);
     }
 

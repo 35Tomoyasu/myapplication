@@ -33,11 +33,17 @@ a.my-navbar-item:hover {
   color: #ffffff;
 }
 
-
+.table td:nth-child(1),
+.table td:nth-child(2),
 .table td:nth-child(3),
 .table td:nth-child(4),
-.table td:nth-child(5){
+.table td:nth-child(5) {
   white-space: nowrap;
+}
+
+thead {
+  background-color: #e6e9ed;
+  border-color: #e6e9ed;
 }
 
 .form-control[disabled],
@@ -58,16 +64,55 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
   text-align: center;
 }
 
-a {
-  color: #434A54;
-} */
-
-.fa-sort-down {
-  color: blue;
+.sort {
+  cursor: pointer;
+  position: relative;
 }
 
-.fa-sort-up {
-  color: red;
+.sort a {
+  color: #434A54;
+  display: block;
+}
+
+.sort:hover{
+  transition: all 0.75s;
+  background-color: #b8babd;
+  text-decoration: underline;
+} 
+  
+.sort::before, .sort::after {
+  content: "";
+  height: 0;
+  width: 0;
+  position: absolute;
+  border: 5px solid transparent;
+  right: 10px;
+  top: 50%;
+}
+
+.sort::before {
+    border-bottom-color: #aaa;
+    margin-top: -10px;
+}
+.sort::after {
+    border-top-color: #aaa;
+    margin-top: 2px;
+}
+
+.sort.asc::before {
+  border-bottom-color: #444;
+}
+
+.sort.desc::after {
+  border-top-color: #444;
+}
+
+.limit {
+  background-color: #FF4F4F;
+}
+
+.deadline {
+  background-color: #FFFF99;
 }
 
 .pagination { 

@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use App\Task;
@@ -7,7 +9,7 @@ use Illuminate\Validation\Rule;
 
 class EditTaskRequest extends CreateTaskRequest
 {
-    public function rules()
+    public function rules(): array
     {   
         $rule = parent::rules();
 
@@ -19,7 +21,7 @@ class EditTaskRequest extends CreateTaskRequest
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         $attributes = parent::attributes();
 
@@ -28,7 +30,7 @@ class EditTaskRequest extends CreateTaskRequest
         ];
     }
     
-    public function messages()
+    public function messages(): array
     {
         $messages = parent::messages();
 

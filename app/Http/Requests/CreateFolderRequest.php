@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +13,7 @@ class CreateFolderRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,19 +23,17 @@ class CreateFolderRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => 'required|max:30',
+            'name' => ['required', 'max:30'],
         ];
     }
-    
-    // 入力欄の名称日本語化
-    public function attributes()
+
+    public function attributes(): array
     {
         return [
             'name' => 'フォルダ名',
         ];
     }
-
 }

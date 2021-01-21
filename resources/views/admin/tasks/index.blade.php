@@ -1,5 +1,4 @@
 @extends('layout')
-<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css">
 
 @section('content')
   <div class="container">
@@ -16,7 +15,7 @@
           </div>
           <div class="list-group">
             @foreach($folders as $folder)
-              <a href="{{ route('admin.tasks.index', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder_id === $folder->id ? 'active' : ''  }}" >
+              <a href="{{ route('admin.tasks.index', ['id' => $folder->id]) }}" class="list-group-item {{ $current_folder->id === $folder->id ? 'active' : ''  }}" >
                 {{ $folder->name }}             
               </a>
             @endforeach
@@ -24,17 +23,17 @@
         </nav>
         <nav class="panel panel-default">
           <div class="panel-heading">フォルダ編集／削除</div>
-
-          <!-- 編集画面へ遷移 -->
           <div class="panel-body">
-            <a href="{{ route('admin.folders.edit', ['id' => $current_folder_id]) }}" class="btn btn-primary btn-block">
+
+            <!-- 編集画面へ遷移 -->
+            <a href="{{ route('admin.folders.edit', ['id' => $current_folder->id]) }}" class="btn btn-primary btn-block">
               選択中のフォルダを編集
             </a>
 
-          <!-- 削除機能 -->
-            <form action="{{ route('admin.folders.delete', ['id' => $current_folder_id]) }}" id="form_{{ $folder->id }}" method="post">
+            <!-- 削除機能 -->
+            <form action="{{ route('admin.folders.delete', ['id' => $current_folder->id]) }}" id="form_{{ $current_folder->id }}" method="post">
               {{ csrf_field() }}
-            <a href="#" data-id="{{ $folder->id }}" class="btn btn-danger btn-block" onclick="deleteFolderPost(this);">選択中のフォルダを削除</a>
+            <a href="#" data-id="{{ $current_folder->id }}" class="btn btn-danger btn-block" onclick="deleteFolderPost(this, '{{ $current_folder->name }}');">選択中のフォルダを削除</a>
             </form>
           </div>
         </nav>
@@ -46,7 +45,7 @@
           <div class="panel-heading">タスク</div>
           <div class="panel-body">
             <div class="text-right">
-            <a href="{{ route('admin.tasks.create', ['id' => $current_folder_id]) }}" class="btn btn-success btn-block">タスクを追加</a>
+            <a href="{{ route('admin.tasks.create', ['id' => $current_folder->id]) }}" class="btn btn-success btn-block">タスクを追加</a>
             </div>
           </div>
           <table class="table">
@@ -56,7 +55,9 @@
               <th class="text-center" width="45%">内容</th>
               <th class="text-center" width="10%">状態</th>
               <th class="text-center" width="10%">優先度</th>
-              <th class="text-center" width="15%">@sortablelink('finish_date', '期限')</th>
+              
+              <!-- $direction: パラメータ(asc or desc)を取得 -->
+              <th class="text-center sort {{ $direction }}" width="15%">@sortablelink('finish_date', '期限')</th>
               <th></th>
               <th></th>
             </tr>
@@ -70,7 +71,15 @@
                   <span class="label {{ $task->status_class }}">{{ $task->status_label }}</span>
                 </td>
                 <td class="text-center">{{ $task->priority }}</td> 
-                <td class="text-center">{{ $task->formatted_finish_date }}</td>
+
+                <!-- 期限カラムの背景色について、期限当日or過ぎた場合:赤、期限まで1〜3日以内:黃にする -->
+                @if (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) <= \Carbon\Carbon::now())
+                  <td class="text-center limit">{{ $task->formatted_finish_date }}</td>
+                @elseif (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) > \Carbon\Carbon::now() && \Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) <= \Carbon\Carbon::now()->addDay(3))
+                  <td class="text-center deadline">{{ $task->formatted_finish_date }}</td>
+                @else
+                  <td class="text-center">{{ $task->formatted_finish_date }}</td>
+                @endif
                 
                 <!-- 編集画面へ遷移 -->
                 <td><a href="{{ route('admin.tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" class="btn btn-xs btn-primary">編集</a></td>
@@ -79,7 +88,7 @@
                 <td>
                 <form action="{{ route('admin.tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" id="form_{{ $task->id }}" method="post">
                 {{ csrf_field() }}
-                <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deleteTaskPost(this);">削除</a>
+                <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deleteTaskPost(this, '{{ $task->name }}');">削除</a>
                 </form>
                 </td>
               </tr>
@@ -106,19 +115,19 @@
   確認メッセージを流す。 
   *************************************/
 
-    function deleteFolderPost(e) {
+    function deleteFolderPost(e ,name) {
       'use strict';
     
-      if (confirm('本当にフォルダ名【{{ $folder->name }}】を削除しますか?')) {
-      document.getElementById('form_' + e.dataset.id).submit();
+      if (confirm('本当に、フォルダ名【' + name + '】を削除しますか?')) { 
+        document.getElementById('form_' + e.dataset.id).submit();
       }
     }
 
-    function deleteTaskPost(e) {
+    function deleteTaskPost(e ,name) {
       'use strict';
     
-      if (confirm('本当にタスク名【{{ $task->name }}】を削除しますか?')) {
-      document.getElementById('form_' + e.dataset.id).submit();
+      if (confirm('本当に、タスク名【' + name + '】を削除しますか?')) {
+        document.getElementById('form_' + e.dataset.id).submit();
       }
     }
   </script>

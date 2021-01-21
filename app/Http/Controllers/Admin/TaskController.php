@@ -11,43 +11,64 @@ use App\Http\Requests\EditTaskRequest;
 use App\Task;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Illuminate\Http\Request;
 
 class TaskController extends Controller
 {   
-    public function index(int $id)
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function index(int $id, Request $request)
     {
-        // ユーザーのフォルダを取得する
+        // ユーザーのフォルダを取得
         $folders = Auth::user()->folders()->get();
 
-        // 選ばれたフォルダを取得する
+        // 選ばれたフォルダを取得
         $current_folder = Folder::find($id);
 
-        // 選ばれたフォルダに紐づくタスクを取得する(1ページ表示最大10件)
+        // 選ばれたフォルダに紐づくタスクを取得(1ページ最大10件まで表示)
         $tasks = $current_folder->tasks()->sortable()->paginate(3);
 
-        return view('admin/tasks/index', [
+        return view('admin.tasks.index', [
             'folders' => $folders,
-            'current_folder_id' => $current_folder->id,
+            'current_folder' => $current_folder, //current_folderの情報を全て渡す
             'tasks' => $tasks,
+            'direction' => $request->direction,
         ]);
     }   
 
     /**
      * GET /folders/{id}/tasks/create
      */
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return View
+     */
     public function create(int $id): View
     {   
-        return view('admin/tasks/create', [
+        return view('admin.tasks.create', [
             'folder_id' => $id ,
         ]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param CreateTaskRequest $request
+     * @param integer $id
+     * @return void
+     */
     public function store(CreateTaskRequest $request, int $id)
     {   
         $current_folder = Folder::find($id);
         $task = new Task();
         
-        $task->name = $request->name;
+        $task->name = $request->task_name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;
@@ -64,15 +85,30 @@ class TaskController extends Controller
     /*
      * GET /folders/{id}/tasks/{task_id}/edit
      */
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @param integer $task_id
+     * @return View
+     */
     public function edit(int $id, int $task_id): View
     {
         $task = Task::find($task_id);
 
-        return view('admin/tasks/edit', [
+        return view('admin.tasks.edit', [
             'task' => $task,
         ]);
     }    
 
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @param integer $task_id
+     * @param EditTaskRequest $request
+     * @return void
+     */
     public function update(int $id, int $task_id, EditTaskRequest $request)
     {
         $task = Task::find($task_id);
@@ -90,6 +126,13 @@ class TaskController extends Controller
         ]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @param integer $task_id
+     * @return void
+     */
     public function delete(int $id, int $task_id)
     {
         $task = Task::find($task_id);

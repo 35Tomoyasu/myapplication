@@ -16,23 +16,33 @@ class FolderController extends Controller
     /**
      * GET /folders/create
      */
+    /**
+     * Undocumented function
+     *
+     * @return View
+     */
     public function create(): View
     {
-        return view('admin/folders/create');
+        return view('admin.folders.create');
     }
 
-    public function store(CreateFolderRequest $request) 
+    /**
+     * Undocumented function
+     *
+     * @param CreateFolderRequest $request
+     * @return void
+     */
+    public function store(CreateFolderRequest $request)
     {
         // フォルダモデルのインスタンスを作成する
         $folder = new Folder();
+
         // タイトルに入力値を代入する
         $folder->name = $request->name;
         $folder->user_id = $request->user()->id;
         $folder->created_by = $request->user()->id;
         $folder->updated_by = $request->user()->id;
 
-        // インスタンスの状態をデータベースに書き込む
-        // $folder->save();
         // ★ ユーザーに紐づけて保存
         Auth::user()->folders()->save($folder);
         return redirect()->route('admin.tasks.index', [
@@ -43,38 +53,49 @@ class FolderController extends Controller
     /**
      * GET /folders/{id}/edit
      */
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return View
+     */
     public function edit(int $id): View
     {
         $current_folder = Folder::find($id);
 
-        return view('admin/folders/edit', [
+        return view('admin.folders.edit', [
             'folder' => $current_folder,
         ]);
     }
 
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @param EditFolderRequest $request
+     * @return void
+     */
     public function update(int $id, EditFolderRequest $request)
     {
-        // 1
         $current_folder = Folder::find($id);
-
-        // 2
         $current_folder->name = $request->name;
         $current_folder->save();
 
-        // 3
         return redirect()->route('admin.tasks.index', [
             'id' => $current_folder->id,
         ]);
     }
 
-    public function delete(int $id) 
+    /**
+     * Undocumented function
+     *
+     * @param integer $id
+     * @return void
+     */
+    public function delete(int $id)
     {
-        // ★ 選ばれたフォルダを取得する
         $current_folder = Folder::find($id);
-
-        // ★ フォルダに紐づくタスクの削除
         $current_folder->tasks()->delete();
-
         $current_folder->delete();
 
         return redirect('/');

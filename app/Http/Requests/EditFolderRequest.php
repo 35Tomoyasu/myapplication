@@ -1,27 +1,27 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
-use App\Folder;
-use Illuminate\Validation\Rule;
+class EditFolderRequest extends CreateFolderRequest
+{   
+    public function rules(): array
 
-class EditFolderRequest extends CreateFolder
-{
-    public function rules()
     {   
         $rule = parent::rules();
 
         return $rule;
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         $attributes = parent::attributes();
 
         return $attributes;
     }
     
-    public function messages()
+    public function messages(): array
     {
         $messages = parent::messages();
 

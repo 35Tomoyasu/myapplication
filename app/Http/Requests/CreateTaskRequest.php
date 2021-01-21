@@ -1,5 +1,7 @@
 <?php
 
+declare(strict_types = 1);
+
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
@@ -11,7 +13,7 @@ class CreateTaskRequest extends FormRequest
      *
      * @return bool
      */
-    public function authorize()
+    public function authorize(): bool
     {
         return true;
     }
@@ -21,17 +23,17 @@ class CreateTaskRequest extends FormRequest
      *
      * @return array
      */
-    public function rules()
+    public function rules(): array
     {
         return [
-            'name' => 'required|max:30',
-            'contents' => 'required|max:255',
+            'name' => ['required', 'max:30'],
+            'contents' => ['required', 'max:255'],
             'finish_date' => 'required',
             'priority' => 'required',
         ];
     }
 
-    public function attributes()
+    public function attributes(): array
     {
         return [
             'name' => 'タスク名',
@@ -41,7 +43,7 @@ class CreateTaskRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    public function messages(): array
     {
         return [
             'finish_date.required' => ':attribute には今日以降の日時を入力してください。',

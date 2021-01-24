@@ -38,7 +38,7 @@ class FolderController extends Controller
         $folder = new Folder();
 
         // 入力値を代入
-        $folder->name = $request->name;
+        $folder->name = $request->folder_name;
         $folder->user_id = $request->user()->id;
         $folder->created_by = $request->user()->id;
         $folder->updated_by = $request->user()->id;
@@ -79,7 +79,7 @@ class FolderController extends Controller
     public function update(int $id, EditFolderRequest $request)
     {
         $current_folder = Folder::find($id);
-        $current_folder->name = $request->name;
+        $current_folder->name = $request->folder_name;
         $current_folder->save();
 
         return redirect()->route('admin.tasks.index', [

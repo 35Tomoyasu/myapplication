@@ -21,9 +21,9 @@
             <form action="{{ route('admin.folders.edit', ['id' => $folder->id]) }}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="name">フォルダ名</label>
-                <input type="text" class="form-control" name="name" id="name"
-                       value="{{ old('name') ?? $folder->name }}" />
+                <label for="folder_name">フォルダ名</label>
+                <input type="text" class="form-control" name="folder_name" id="folder_name"
+                       value="{{ old('folder_name') ?? $folder->name }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-primary">変更</button>

@@ -26,7 +26,7 @@ class CreateTaskRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:30'],
+            'task_name' => ['required', 'max:30'],
             'contents' => ['required', 'max:255'],
             'finish_date' => 'required',
             'priority' => 'required',
@@ -36,7 +36,6 @@ class CreateTaskRequest extends FormRequest
     public function attributes(): array
     {
         return [
-            'name' => 'タスク名',
             'contents' => '内容',
             'finish_date' => '期限',
             'priority' => '優先度',

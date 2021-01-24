@@ -72,6 +72,7 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
 .sort a {
   color: #434A54;
   display: block;
+  cursor: pointer;
 }
 
 .sort:hover{
@@ -105,6 +106,10 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
 
 .sort.desc::after {
   border-top-color: #444;
+}
+
+.over {
+  background-color: #808080;
 }
 
 .limit {

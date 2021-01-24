@@ -23,14 +23,14 @@ class TaskController extends Controller
      */
     public function index(int $id, Request $request)
     {
-        // ユーザーのフォルダを取得
+        // ユーザーに紐づくフォルダを取得
         $folders = Auth::user()->folders()->get();
 
         // 選ばれたフォルダを取得
         $current_folder = Folder::find($id);
 
         // 選ばれたフォルダに紐づくタスクを取得(1ページ最大10件まで表示)
-        $tasks = $current_folder->tasks()->sortable()->paginate(3);
+        $tasks = $current_folder->tasks()->sortable()->paginate(10);
 
         return view('admin.tasks.index', [
             'folders' => $folders,
@@ -66,15 +66,19 @@ class TaskController extends Controller
     public function store(CreateTaskRequest $request, int $id)
     {   
         $current_folder = Folder::find($id);
+
+        // タスクモデルのインスタンスを作成
         $task = new Task();
         
-        $task->name = $request->task_name;
+        // 入力値を代入('status'はデフォルト値をマイグレーションで設定済)
+        $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;
         $task->created_by = $request->user()->id;
         $task->updated_by = $request->user()->id;
-    
+        
+        // 作成したタスクを保存
         $current_folder->tasks()->save($task);
 
         return redirect()->route('admin.tasks.index', [
@@ -112,13 +116,11 @@ class TaskController extends Controller
     public function update(int $id, int $task_id, EditTaskRequest $request)
     {
         $task = Task::find($task_id);
-
         $task->name = $request->name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;
         $task->status = $request->status;
-
         $task->save();
 
         return redirect()->route('admin.tasks.index', [
@@ -136,7 +138,6 @@ class TaskController extends Controller
     public function delete(int $id, int $task_id)
     {
         $task = Task::find($task_id);
-
         $task->delete();
 
         return redirect()->route('admin.tasks.index', [

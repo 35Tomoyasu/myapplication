@@ -34,17 +34,18 @@ class FolderController extends Controller
      */
     public function store(CreateFolderRequest $request)
     {
-        // フォルダモデルのインスタンスを作成する
+        // フォルダモデルのインスタンスを作成
         $folder = new Folder();
 
-        // タイトルに入力値を代入する
+        // 入力値を代入
         $folder->name = $request->name;
         $folder->user_id = $request->user()->id;
         $folder->created_by = $request->user()->id;
         $folder->updated_by = $request->user()->id;
 
-        // ★ ユーザーに紐づけて保存
+        // ユーザーに紐づけて保存
         Auth::user()->folders()->save($folder);
+
         return redirect()->route('admin.tasks.index', [
             'id' => $folder->id,
         ]);
@@ -95,6 +96,8 @@ class FolderController extends Controller
     public function delete(int $id)
     {
         $current_folder = Folder::find($id);
+
+        // フォルダ削除の際、フォルダ内のタスクも全て削除
         $current_folder->tasks()->delete();
         $current_folder->delete();
 

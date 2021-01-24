@@ -72,10 +72,12 @@
                 </td>
                 <td class="text-center">{{ $task->priority }}</td> 
 
-                <!-- 期限カラムの背景色について、期限当日or過ぎた場合:赤、期限まで1〜3日以内:黃にする -->
-                @if (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) <= \Carbon\Carbon::now())
+                <!-- 期限カラムの背景色について、期限過ぎた場合:灰、期限当日〜2日未満:赤、期限まで2日以上〜4日未満:黃にする -->
+                @if (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) < \Carbon\Carbon::now())
+                  <td class="text-center over">{{ $task->formatted_finish_date }}</td>
+                @elseif (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) >= \Carbon\Carbon::now() && \Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) < \Carbon\Carbon::now()->addDay(2))
                   <td class="text-center limit">{{ $task->formatted_finish_date }}</td>
-                @elseif (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) > \Carbon\Carbon::now() && \Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) <= \Carbon\Carbon::now()->addDay(3))
+                @elseif (\Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) >= \Carbon\Carbon::now()->addDay(2) && \Carbon\Carbon::createFromFormat('Y/m/d H:i', $task->formatted_finish_date) < \Carbon\Carbon::now()->addDay(4))
                   <td class="text-center deadline">{{ $task->formatted_finish_date }}</td>
                 @else
                   <td class="text-center">{{ $task->formatted_finish_date }}</td>

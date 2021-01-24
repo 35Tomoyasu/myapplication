@@ -19,8 +19,8 @@
             <form action="{{ route('admin.folders.create') }}" method="post">
               @csrf
               <div class="form-group">
-                <label for="name">フォルダ名</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" />
+                <label for="folder_name">フォルダ名</label>
+                <input type="text" class="form-control" name="folder_name" id="folder_name" value="{{ old('folder_name') }}" />
               </div>
               <div class="text-right">
                 <button type="submit" class="btn btn-success">作成</button>

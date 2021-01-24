@@ -71,7 +71,7 @@ class TaskController extends Controller
         $task = new Task();
         
         // 入力値を代入('status'はデフォルト値をマイグレーションで設定済)
-        $task->name = $request->name;
+        $task->name = $request->task_name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;
@@ -116,7 +116,7 @@ class TaskController extends Controller
     public function update(int $id, int $task_id, EditTaskRequest $request)
     {
         $task = Task::find($task_id);
-        $task->name = $request->name;
+        $task->name = $request->task_name;
         $task->contents = $request->contents;
         $task->finish_date = $request->finish_date;
         $task->priority = $request->priority;

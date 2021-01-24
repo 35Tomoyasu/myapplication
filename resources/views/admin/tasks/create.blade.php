@@ -21,8 +21,8 @@
             <form action="{{ route('admin.tasks.create', ['id' => $folder_id]) }}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="name">タスク名</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}" />
+                <label for="task_name">タスク名</label>
+                <input type="text" class="form-control" name="task_name" id="task_name" value="{{ old('task_name') }}" />
               </div>
               <div class="form-group">
                 <label for="contents">内容</label>

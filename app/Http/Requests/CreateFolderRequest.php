@@ -26,14 +26,7 @@ class CreateFolderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => ['required', 'max:30'],
-        ];
-    }
-
-    public function attributes(): array
-    {
-        return [
-            'name' => 'フォルダ名',
+            'folder_name' => ['required', 'max:30'],
         ];
     }
 }

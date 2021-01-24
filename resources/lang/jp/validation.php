@@ -149,8 +149,7 @@ return [
         'email' => 'メールアドレス',
         'password' => 'パスワード',
         'token' => 'トークン',
+        'folder_name' => 'フォルダ名',
+        'task_name' => 'タスク名' ,
     ],
-
-    
-
 ];

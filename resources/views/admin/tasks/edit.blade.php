@@ -14,15 +14,15 @@
             @if($errors->any())
               <div class="alert alert-danger">
                 @foreach($errors->all() as $message)
-                  <p>{{ $message }}</p>
+                  <p>※ {{ $message }}</p>
                 @endforeach
               </div>
             @endif
             <form action="{{ route('admin.tasks.edit', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="name">タスク名</label>
-                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') ?? $task->name }}" />
+                <label for="task_name">タスク名</label>
+                <input type="text" class="form-control" name="task_name" id="task_name" value="{{ old('task_name') ?? $task->name }}" />
               </div>
               <div class="form-group">
                 <label for="contents">内容</label>

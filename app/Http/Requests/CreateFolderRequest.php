@@ -26,7 +26,7 @@ class CreateFolderRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'folder_name' => ['required', 'max:30'],
+            'folder_name' => ['required', 'max:15'],
         ];
     }
 }

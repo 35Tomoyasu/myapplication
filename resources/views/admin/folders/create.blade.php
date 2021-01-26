@@ -9,11 +9,9 @@
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
-                <ul>
-                  @foreach($errors->all() as $message)
-                    <li>{{ $message }}</li>
-                  @endforeach
-                </ul>
+                @foreach($errors->all() as $message)
+                  <p>※ {{ $message }}</p>
+                @endforeach
               </div>
             @endif
             <form action="{{ route('admin.folders.create') }}" method="post">

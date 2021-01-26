@@ -10,7 +10,7 @@
           </div>
           <div class="panel-body">
             <div class="text-center">
-              <a href="{{ route('folders.create') }}" class="btn btn-success">
+              <a href="{{ route('admin.folders.create') }}" class="btn btn-success">
                 フォルダ作成画面へ
               </a>
             </div>

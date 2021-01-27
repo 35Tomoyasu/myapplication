@@ -32,7 +32,7 @@
 
             <!-- 削除機能 -->
             <form action="{{ route('admin.folders.delete', ['id' => $current_folder->id]) }}" id="form_{{ $current_folder->id }}" method="post">
-              {{ csrf_field() }}
+              @csrf
             <a href="#" data-id="{{ $current_folder->id }}" class="btn btn-danger btn-block" onclick="deleteFolderPost(this, '{{ $current_folder->name }}');">選択中のフォルダを削除</a>
             </form>
           </div>
@@ -89,7 +89,7 @@
                 <!-- 削除機能 -->
                 <td>
                 <form action="{{ route('admin.tasks.delete', ['id' => $task->folder_id, 'task_id' => $task->id]) }}" id="form_{{ $task->id }}" method="post">
-                {{ csrf_field() }}
+                  @csrf
                 <a href="#" data-id="{{ $task->id }}" class="btn btn-xs btn-danger" onclick="deleteTaskPost(this, '{{ $task->name }}');">削除</a>
                 </form>
                 </td>
@@ -119,7 +119,6 @@
 
     function deleteFolderPost(e ,name) {
       'use strict';
-    
       if (confirm('本当に、フォルダ名【' + name + '】を削除しますか?')) { 
         document.getElementById('form_' + e.dataset.id).submit();
       }
@@ -127,7 +126,6 @@
 
     function deleteTaskPost(e ,name) {
       'use strict';
-    
       if (confirm('本当に、タスク名【' + name + '】を削除しますか?')) {
         document.getElementById('form_' + e.dataset.id).submit();
       }

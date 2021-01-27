@@ -23,7 +23,8 @@ class CreateTasksTable extends Migration
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();
-            // 外部キーはtimestamps();の下に書くと見やすい
+
+            // 外部キー(フォルダID)
             $table->unsignedBigInteger('folder_id');
             $table->foreign('folder_id')->references('id')->on('folders');
         });

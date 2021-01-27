@@ -65,8 +65,7 @@ class Task extends Model
      */
     public function getFormattedFinishDateAttribute()
     {   
-        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['finish_date'])
-            ->format('Y/m/d H:i');
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['finish_date'])->format('Y/m/d H:i');
     }
 }
 

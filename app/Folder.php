@@ -8,8 +8,6 @@ use App\Task;
 
 class Folder extends Model
 {
-
-    // ※12/6メンタリング時修正
     public function folder() 
     {
         return $this->belongsTo(User::class);
@@ -17,7 +15,6 @@ class Folder extends Model
 
     public function tasks()
     {
-        // ※12/6メンタリング時修正
         return $this->hasMany(Task::class);
     }
 }

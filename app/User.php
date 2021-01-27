@@ -2,12 +2,11 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use App\Folder;
-use App\Mail\ResetPassword; // ★ 追加
-use Illuminate\Support\Facades\Mail; // ★ 追加
+use App\Mail\ResetPassword; 
+use Illuminate\Support\Facades\Mail;
 
 class User extends Authenticatable
 {

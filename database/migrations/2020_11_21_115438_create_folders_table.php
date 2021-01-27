@@ -19,6 +19,7 @@ class CreateFoldersTable extends Migration
             $table->string('created_by');
             $table->string('updated_by');
             $table->timestamps();
+            
             // 外部キー（ユーザーID）
             $table->unsignedBigInteger('user_id');
             $table->foreign('user_id')->references('id')->on('users');

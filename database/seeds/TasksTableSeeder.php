@@ -13,7 +13,6 @@ class TasksTableSeeder extends Seeder
      */
     public function run()
     {
-        // 質問事項
         foreach (range(1, 3) as $num) {
             DB::table('tasks')->insert([
                 'name' => "サンプルタスク {$num}",

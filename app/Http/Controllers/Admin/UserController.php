@@ -5,30 +5,34 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\User;
 
 class UserController extends Controller
-{
-    //userデータの取得
-    public function index() {
-        $show_user_flag = true;
-        return view('admin.user.index', ['user' => Auth::user(), 'show_user_flag' => $show_user_flag]);
-    }
-
-    //userデータの編集
-    public function edit() {
-        $show_user_flag = true;
-        return view('admin.user.edit', ['user' => Auth::user(), 'show_user_flag' => $show_user_flag]);
-    }
-
-    //userデータの保存
-    public function update(Request $request) {
-
-        $user_form = $request->all();
+{       
+    /**
+     * GET /user/{id}/show
+     */
+    public function show() 
+    {   
         $user = Auth::user();
+        $created_at = $user->created_at->format('Y/m/d h:i');
+        return view('admin.user.show', ['user' => $user, 'created_at' => $created_at]);
+    }
 
-        //不要な「_token」の削除
-        unset($user_form['_token']);
-        $user->fill($user_form)->save();
-        return redirect('admin.user.index');
+    /**
+     * GET /user/{id}/edit
+     */
+    public function edit() 
+    {   
+        $user = Auth::user();
+        return view('admin.user.edit', ['user' => $user]);
+    }
+
+    //userデータの更新
+    public function update(Request $request) 
+    {   
+        $user = User::where('id', $request->user()->id)->first();
+        $user->update(['name' => $request->name, 'email' => $request->email]);
+        return redirect()->route('admin.user.show', ['id' => $user->id]);
     }
 }

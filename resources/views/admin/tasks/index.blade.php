@@ -1,4 +1,4 @@
-@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
+@extends('layoutUserInfo')
 
 @section('content')
   <div class="container">

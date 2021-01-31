@@ -5,9 +5,9 @@ Route::group(['middleware' => 'auth'], function () {
     Route::group(['prefix' => 'admin'], function () { 
 
         //ユーザーの設定
-        Route::get('user/index', 'Admin\UserController@index')->name('admin.user.index');
-        Route::get('user/edit', 'Admin\UserController@edit')->name('admin.user.edit');
-        Route::post('user/edit', 'Admin\UserController@update')->name('admin.user.update');
+        Route::get('user/{id}/show', 'Admin\UserController@show')->name('admin.user.show');
+        Route::get('user/{id}/edit', 'Admin\UserController@edit')->name('admin.user.edit');
+        Route::post('user/{id}/edit', 'Admin\UserController@update')->name('admin.user.update');
         
         // フォルダの設定
         Route::get('/folders/create', 'Admin\FolderController@create')->name('admin.folders.create');

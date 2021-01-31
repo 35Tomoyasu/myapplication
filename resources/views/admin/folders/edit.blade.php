@@ -1,4 +1,4 @@
-@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
+@extends('layoutHome')
 
 @section('styles')
   @include('share.flatpickr.styles')

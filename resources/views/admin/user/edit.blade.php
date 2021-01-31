@@ -1,4 +1,4 @@
-@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
+@extends('layoutUserInfo')
 
 @section('content')
   <div class="container">
@@ -14,18 +14,18 @@
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('admin.user.update') }}" method="POST">
+            <form action="{{ route('admin.user.update', ['id' => Auth::user()->id]) }}" method="POST">
               @csrf
               <div class="form-group">
               <label for="name">ユーザー名</label>
               <div>
-                <input class="form-control" value="{{ $user->name }}">
+                <input class="form-control" name="name" value="{{ $user->name }}">
               </div>
             </div>
             <div class="form-group">
               <label for="email">メールアドレス</label>
               <div>
-                <input class="form-control" value="{{ $user->email }}">
+                <input class="form-control" name="email" value="{{ $user->email }}">
               </div>
             </div>
               <div class="text-right">

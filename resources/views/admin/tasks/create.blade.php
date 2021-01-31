@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
 
 @section('styles')
   @include('share.flatpickr.styles')
@@ -14,7 +14,7 @@
             @if($errors->any())
               <div class="alert alert-danger">
                 @foreach($errors->all() as $message)
-                  <p>※ {{ $message }}</p>
+                  <p>{{ $message }}</p>
                 @endforeach
               </div>
             @endif
@@ -47,6 +47,9 @@
             </form>
           </div>
         </nav>
+        <div class="text-center">
+          <a href="{{ route('home') }}" class="btn">ホームへ戻る</a>
+        </div>
       </div>
     </div>
   </div>

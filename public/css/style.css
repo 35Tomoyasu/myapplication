@@ -56,12 +56,8 @@ a.list-group-item.active, a.list-group-item.active:focus, a.list-group-item.acti
   border-color: #333;
 }
 
-.btn-primary.btn-block {
-  margin-bottom: 1px;
-}
-
-.text-center {
-  text-align: center;
+.btn-primary {
+  margin-bottom: 5px;
 }
 
 .sort {

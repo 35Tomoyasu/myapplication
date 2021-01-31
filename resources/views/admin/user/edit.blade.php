@@ -4,8 +4,8 @@
   <div class="container">
     <div class="row">
       <div class="col col-md-offset-3 col-md-6">
-        <nav class="panel panel-success">
-          <div class="panel-heading">フォルダ作成画面</div>
+        <nav class="panel panel-primary">
+          <div class="panel-heading">ユーザー編集画面</div>
           <div class="panel-body">
             @if($errors->any())
               <div class="alert alert-danger">
@@ -14,14 +14,22 @@
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('admin.folders.create') }}" method="post">
+            <form action="{{ route('admin.user.update') }}" method="POST">
               @csrf
               <div class="form-group">
-                <label for="folder_name">フォルダ名</label>
-                <input type="text" class="form-control" name="folder_name" id="folder_name" value="{{ old('folder_name') }}" />
+              <label for="name">ユーザー名</label>
+              <div>
+                <input class="form-control" value="{{ $user->name }}">
               </div>
+            </div>
+            <div class="form-group">
+              <label for="email">メールアドレス</label>
+              <div>
+                <input class="form-control" value="{{ $user->email }}">
+              </div>
+            </div>
               <div class="text-right">
-                <button type="submit" class="btn btn-success">作成</button>
+                <button type="submit" class="btn btn-primary">変更</button>
               </div>
             </form>
           </div>
@@ -33,3 +41,4 @@
     </div>
   </div>
 @endsection
+

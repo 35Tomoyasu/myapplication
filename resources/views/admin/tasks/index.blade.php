@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
 
 @section('content')
   <div class="container">
@@ -26,9 +26,7 @@
           <div class="panel-body">
 
             <!-- 編集画面へ遷移 -->
-            <a href="{{ route('admin.folders.edit', ['id' => $current_folder->id]) }}" class="btn btn-primary btn-block">
-              選択中のフォルダを編集
-            </a>
+            <a href="{{ route('admin.folders.edit', ['id' => $current_folder->id]) }}" class="btn btn-primary btn-block">選択中のフォルダを編集</a>
 
             <!-- 削除機能 -->
             <form action="{{ route('admin.folders.delete', ['id' => $current_folder->id]) }}" id="form_{{ $current_folder->id }}" method="post">
@@ -41,7 +39,7 @@
 
       <!-- ここからタスク表示画面 -->
       <div class="column col-md-8">
-        <div class="panel panel-default">
+        <nav class="panel panel-default">
           <div class="panel-heading">タスク</div>
           <div class="panel-body">
             <div class="text-right">
@@ -97,9 +95,9 @@
             @endforeach
             </tbody>
           </table>
-        </div>
+        </nav>
 
-        <!-- ページングの設定（※ソート条件を反映させる） -->
+        <!-- ページングの設定（ソート条件を反映させる） -->
         <div class="text-center">
         {{ $tasks->appends(request()->query())->links() }}
         </div>

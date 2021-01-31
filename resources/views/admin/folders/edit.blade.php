@@ -1,4 +1,4 @@
-@extends('layout')
+@extends('layout', ['show_user_flag' => $show_user_flag ?? false])
 
 @section('styles')
   @include('share.flatpickr.styles')
@@ -14,11 +14,11 @@
             @if($errors->any())
               <div class="alert alert-danger">
                 @foreach($errors->all() as $message)
-                  <p>※ {{ $message }}</p>
+                  <p>{{ $message }}</p>
                 @endforeach
               </div>
             @endif
-            <form action="{{ route('admin.folders.edit', ['id' => $folder->id]) }}" method="POST">
+            <form action="{{ route('admin.folders.update', ['id' => $folder->id]) }}" method="POST">
               @csrf
               <div class="form-group">
                 <label for="folder_name">フォルダ名</label>
@@ -30,6 +30,9 @@
             </form>
           </div>
         </nav>
+        <div class="text-center">
+          <a href="{{ route('home') }}" class="btn">ホームへ戻る</a>
+        </div>
       </div>
     </div>
   </div>
